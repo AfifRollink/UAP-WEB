@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAP APIP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>LIST ITEM</h1>
+        <table >
+            <thead>
+                <tr>
+                    <td>Kode</td>
+                    <td>Nama barang</td>
+                    <td>Harga</td>
+                </tr>
+            </thead>
+            <tbody id="banyakbarang"></tbody>
+        </table>
+    
+        <h1>User Input</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Masukkan Kode</td>
+                    <td>:</td>
+                    <td><input type="text" id="kode"></td>
+                </tr>
+                <tr>
+                    <td>Banyaknya Barang</td>
+                    <td>:</td>
+                    <td><input type="text" id="banyakitem"></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><button onclick="count()">Submit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+<script>
+    const listItem = {
+        "001": {nama: "A", harga: 10000},
+        "002": {nama: "B", harga: 20000},
+        "003": {nama: "C", harga: 30000},
+    }
+
+    function showitem(){
+        item_list_element = document.getElementById("banyakbarang");
+
+        for(const kode in listItem){
+            const {nama, harga} = listItem[kode];
+
+            const row = document.createElement("tr");
+
+            const kodeColumn = document.createElement("td");
+            kodeColumn.textContent= kode;
+            row.appendChild(kodeColumn);
+
+            const namaColumn = document.createElement("td");
+            namaColumn.textContent= nama;
+            row.appendChild(namaColumn);
+
+            const hargaColumn = document.createElement("td");
+            hargaColumn.textContent= harga;
+            row.appendChild(hargaColumn);
+
+            item_list_element.appendChild(row)
+        }
+    }
+
+    function count () {
+        var kode_item = document.getElementById("kode").value;
+        var banyak_item = document.getElementById("banyakitem").value;
+
+        if(listItem.hasOwnProperty(kode_item)){
+            var hargaBarang = listItem[kode_item].harga;
+
+            var total = banyak_item * hargaBarang;
+
+            alert("Total Pembayaran adalah :" + total);
+
+            var hitung = prompt("Masukkan Uang User :");
+
+            var kembalian =  hitung - total;
+
+            alert("Total Kembalian Anda adalah : " + kembalian)
+        }else{
+            alert("Kode barang tidak valid")
+        }
+    } 
+
+
+    document.addEventListener("DOMContentLoaded", function(){
+            showitem();
+        });
+
+    
+
+</script>
+</body>
+</html>
